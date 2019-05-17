@@ -1,6 +1,6 @@
 var itemsList = [
     {text:'uno', isInitial: true},
-    {text:'dos', isInitial: false},
+    {text:'dos', isInitial: true},
     {text:'tres', isInitial: true},
   ]
   
@@ -23,30 +23,30 @@ var itemsList = [
     btn.onclick = function(){ btnFuction(this) }
     return btn
   }
-  
+   var setNode = function(nodeName){
+       var nodeName = document.getElementById(nodeName)
+       nodeName.innerHTML = ''
+       return nodeName
+   }
+
+  var createItem = function(text, index){
+    var li = document.createElement('li')
+    li.innerText = text
+    li.appendChild(createBtn('toggle', index, toggleItem))
+    li.appendChild(createBtn('delete', index, deleteItem))
+    return li
+  }
+
   var printItems = function(){
-    // buscamos la lista en el DOM y guardamos el nodo en una variable
-    var initialList = document.getElementById('initialList')
-    // cuando llamamos a la lista limpiamos su contenido
-    initialList.innerHTML = ''
-    var secondList = document.getElementById('secondList')
-    secondList.innerHTML = ''
-    //console.log(initialList)
+    // llamamos a la funcion que setea los nodos que necesitamos
+    var initialList = setNode('initialList')
+    var secondList = setNode('secondList')
     itemsList.map(function(item, index){
-      //console.log(item.text)
-      // creo un li por cada item
-      var itemLi = document.createElement('li')
-      // le asigno el texto del item a cada li como su contenido
-      itemLi.innerText = item.text
-      //console.log(itemLi)
-      // sumamos el boton al li
-      itemLi.appendChild(createBtn('toggle', index, toggleItem))
-      itemLi.appendChild(createBtn('delete', index, deleteItem))
-  
       if(item.isInitial){
-        initialList.appendChild(itemLi) 
+        initialList.appendChild(createItem(item.text, index)) 
       } else {
-        secondList.appendChild(itemLi)
+        secondList.appendChild(createItem(item.text, index))
       }
     })
   }
+
