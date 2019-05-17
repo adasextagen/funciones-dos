@@ -51,14 +51,17 @@ var createBtn = function(text, itemId, btnFuction){
   return btn
 }
 
+// tomamos como paremetro un boton y usanso el ID referenciamos el elemento correspondiente en nuestra lista inicial
 var toggleItem = function(btn){
-  console.log(btn.id)
+  // negando el valor (!) de isInitial en el elemento, lo alternamos de falso a verdadero, haciendo así que cambie donde va a ser impreso en printElements
   itemsList[btn.id].isInitial = !itemsList[btn.id].isInitial
+  // volvemos a llamar print items para ver en pantalla la nueva lista
   printItems()
 }
 
 var deleteItem = function(btn){
-  // splice elimina del array al elemento especificado por su indice.
+  // splice elimina del array al elemento especificado por su indice y cuantos elementos va a eliminar a partir de ahí
   itemsList.splice(btn.id, 1)
+  // volvemos a llamar print items para ver en pantalla la nueva lista
   printItems()
 }
